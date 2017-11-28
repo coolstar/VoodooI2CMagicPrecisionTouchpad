@@ -194,6 +194,13 @@ IOReturn CSMagicMultitouchDevice::handleInput(magic_softc *softc){
     inputReport->ReportID = 0x02;
     inputReport->Button = softc->buttondown ? 0x01 : 0x00;
     
+    if (finger_count > 0)
+        data[7] = 0x03;
+    else
+        data[7] = 0x02;
+    
+    data[8] = 0x31; //Magic
+    
     int timestamp = 31580;
     data[11] = (timestamp >> 13) & 0xFF;
     data[10] = (timestamp >> 5) & 0xFF;
