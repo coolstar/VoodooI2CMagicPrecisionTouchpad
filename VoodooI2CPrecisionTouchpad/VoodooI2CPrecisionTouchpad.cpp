@@ -134,19 +134,10 @@ bool VoodooI2CPrecisionTouchpad::start(IOService *provider){
     
     this->workLoop->addEventSource(this->interruptSource);
     
-    this->timerSource = IOTimerEventSource::timerEventSource(this, OSMemberFunctionCast(IOTimerEventSource::Action, this, &VoodooI2CPrecisionTouchpad::get_input));
-    if (!this->timerSource) {
-        IOLog("%s::Unable to get timer source\n", getName());
-        stop(provider);
-        return false;
-    }
-    this->workLoop->addEventSource(this->timerSource);
-    
-    this->wrapper = new CSGesture;
-    this->wrapper->vendorID = 'nalE';
-    this->wrapper->productID = 'dptE';
-    this->wrapper->softc = &softc;
-    this->wrapper->initialize_wrapper(this);
+    this->magicMultitouchDevice = new CSMagicMultitouchDevice;
+    this->magicMultitouchDevice->init();
+    this->magicMultitouchDevice->attach(this);
+    this->magicMultitouchDevice->start(this);
     
     registerService();
     
@@ -156,44 +147,16 @@ bool VoodooI2CPrecisionTouchpad::start(IOService *provider){
     uint16_t max_x = 3209;
     uint16_t max_y = 2097;
     
-    hw_res_x = 401;
-    hw_res_y = 262;
-    
-    csgesture_softc *sc = &softc;
-    
-    sprintf(sc->product_id, "ELAN");
-    sprintf(sc->firmware_version, "0561");
-    
-    sc->resx = max_x;
-    sc->resy = max_y;
-    
-    /*sc->resx *= 2;
-     sc->resx /= 7;
-     
-     sc->resy *= 2;
-     sc->resy /= 7;*/
-    
-    sc->resx = max_x * 10 / hw_res_x;
-    sc->resy = max_y * 10 / hw_res_y;
-    
-    sc->phyx = max_x;
-    sc->phyy = max_y;
-    
-    sc->frequency = 5;
-    
-    sc->infoSetup = true;
-    
     for (int i = 0;i < MAX_FINGERS; i++) {
-        sc->x[i] = -1;
-        sc->y[i] = -1;
-        sc->p[i] = -1;
+        sc.x[i] = -1;
+        sc.y[i] = -1;
+        sc.p[i] = -1;
     }
     
     this->DeviceIsAwake = true;
     this->IsReading = false;
     
     this->interruptSource->enable();
-    this->timerSource->setTimeoutMS(10);
     
 #define kMyNumberOfStates 2
     
@@ -223,12 +186,6 @@ void VoodooI2CPrecisionTouchpad::stop(IOService *provider){
     this->DeviceIsAwake = false;
     IOSleep(1);
     
-    if (this->timerSource){
-        this->timerSource->cancelTimeout();
-        this->timerSource->release();
-        this->timerSource = NULL;
-    }
-    
     if (this->interruptSource){
         this->interruptSource->disable();
         this->workLoop->removeEventSource(this->interruptSource);
@@ -237,10 +194,11 @@ void VoodooI2CPrecisionTouchpad::stop(IOService *provider){
         this->interruptSource = NULL;
     }
     
-    if (this->wrapper){
-        this->wrapper->destroy_wrapper();
-        delete this->wrapper;
-        this->wrapper = NULL;
+    if (this->magicMultitouchDevice){
+        this->magicMultitouchDevice->stop(this);
+        this->magicMultitouchDevice->terminate(kIOServiceRequired | kIOServiceSynchronous);
+        this->magicMultitouchDevice->release();
+        this->magicMultitouchDevice = NULL;
     }
     
     OSSafeReleaseNULL(this->workLoop);
@@ -256,15 +214,6 @@ IOReturn VoodooI2CPrecisionTouchpad::setPowerState(unsigned long powerState, IOS
     if (powerState == 0){
         //Going to sleep
         if (this->DeviceIsAwake){
-            if (this->timerSource){
-                this->timerSource->cancelTimeout();
-                this->timerSource->release();
-                this->timerSource = NULL;
-            }
-            
-            if (this->wrapper)
-                this->wrapper->prepareToSleep();
-            
             this->DeviceIsAwake = false;
             while (this->IsReading){
                 IOSleep(10);
@@ -281,15 +230,6 @@ IOReturn VoodooI2CPrecisionTouchpad::setPowerState(unsigned long powerState, IOS
             reset_dev();
             enable_abs();
             this->IsReading = false;
-            
-            if (!this->timerSource){
-                this->timerSource = IOTimerEventSource::timerEventSource(this, OSMemberFunctionCast(IOTimerEventSource::Action, this, &VoodooI2CPrecisionTouchpad::get_input));
-                this->workLoop->addEventSource(this->timerSource);
-                this->timerSource->setTimeoutMS(10);
-            }
-            
-            if (this->wrapper)
-                this->wrapper->wakeFromSleep();
             
             this->DeviceIsAwake = true;
             IOLog("%s::Woke up from Sleep!\n", getName());
@@ -525,13 +465,6 @@ IOReturn VoodooI2CPrecisionTouchpad::enable_abs(){
     return write_feature(input_mode.ReportID, (uint8_t *)&input_mode, sizeof(struct INPUT_MODE_FEATURE));
 }
 
-void VoodooI2CPrecisionTouchpad::get_input(OSObject* owner, IOTimerEventSource* sender) {
-    if (this->wrapper)
-        this->wrapper->ProcessGesture(&softc);
-    
-    this->timerSource->setTimeoutMS(5);
-}
-
 void VoodooI2CPrecisionTouchpad::read_input(){
     //Adjust this function to suit your touchpad.
     
@@ -550,8 +483,6 @@ void VoodooI2CPrecisionTouchpad::read_input(){
         struct TOUCHPAD_INPUT_REPORT inputReport;
         memcpy(&inputReport, report + 2, sizeof(TOUCHPAD_INPUT_REPORT));
         
-        csgesture_softc *sc = &softc;
-        
         uint8_t ContactID = inputReport.MTouch.ContactInfo >> 4;
         uint8_t ContactStatus = inputReport.MTouch.ContactInfo & 0xF;
         
@@ -564,18 +495,18 @@ void VoodooI2CPrecisionTouchpad::read_input(){
                     pos_x /= 3;
                     pos_y /= 3;
                     
-                    sc->x[ContactID] = pos_x;
-                    sc->y[ContactID] = pos_y;
-                    sc->p[ContactID] = 10;
+                    sc.x[ContactID] = pos_x;
+                    sc.y[ContactID] = pos_y;
+                    sc.p[ContactID] = 10;
                 } else {
-                    sc->x[ContactID] = -1;
-                    sc->y[ContactID] = -1;
-                    sc->p[ContactID] = -1;
+                    sc.x[ContactID] = -1;
+                    sc.y[ContactID] = -1;
+                    sc.p[ContactID] = -1;
                 }
             }
         }
         
-        sc->buttondown = inputReport.Button & 0x1;
+        sc.buttondown = inputReport.Button & 0x1;
     }
     IOFree(report, maxLen);
     this->IsReading = false;

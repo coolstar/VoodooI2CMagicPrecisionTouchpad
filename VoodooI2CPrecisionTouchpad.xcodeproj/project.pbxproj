@@ -7,18 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F12D20FB1FCE12C300D8CFD4 /* CSMagicMultitouchDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F12D20F91FCE12C300D8CFD4 /* CSMagicMultitouchDevice.cpp */; };
 		F1314C761F4EB6190012153F /* VoodooI2CPrecisionTouchpad.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F1314C751F4EB6190012153F /* VoodooI2CPrecisionTouchpad.hpp */; };
 		F1314C781F4EB6190012153F /* VoodooI2CPrecisionTouchpad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1314C771F4EB6190012153F /* VoodooI2CPrecisionTouchpad.cpp */; };
-		F1314C891F4EB6610012153F /* csgesturescroll.h in Headers */ = {isa = PBXBuildFile; fileRef = F1314C7F1F4EB6610012153F /* csgesturescroll.h */; };
-		F1314C8A1F4EB6610012153F /* csgesture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1314C801F4EB6610012153F /* csgesture.cpp */; };
-		F1314C8B1F4EB6610012153F /* AverageClasses.h in Headers */ = {isa = PBXBuildFile; fileRef = F1314C811F4EB6610012153F /* AverageClasses.h */; };
-		F1314C8C1F4EB6610012153F /* csgesture-softc.h in Headers */ = {isa = PBXBuildFile; fileRef = F1314C821F4EB6610012153F /* csgesture-softc.h */; };
-		F1314C8D1F4EB6610012153F /* csgesture.h in Headers */ = {isa = PBXBuildFile; fileRef = F1314C831F4EB6610012153F /* csgesture.h */; };
-		F1314C8E1F4EB6610012153F /* csgesturescroll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1314C841F4EB6610012153F /* csgesturescroll.cpp */; };
-		F1314C8F1F4EB6610012153F /* VoodooCSGestureHIDWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1314C851F4EB6610012153F /* VoodooCSGestureHIDWrapper.cpp */; };
-		F1314C901F4EB6610012153F /* VoodooCSGestureHIDWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F1314C861F4EB6610012153F /* VoodooCSGestureHIDWrapper.h */; };
-		F1314C911F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1314C871F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.cpp */; };
-		F1314C921F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = F1314C881F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.h */; };
 		F1314C981F4EB7B10012153F /* helpers.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F1314C941F4EB7B10012153F /* helpers.hpp */; };
 		F1314C991F4EB7B10012153F /* VoodooI2CControllerConstants.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F1314C951F4EB7B10012153F /* VoodooI2CControllerConstants.hpp */; };
 		F1314C9A1F4EB7B10012153F /* VoodooI2CControllerDriver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = F1314C961F4EB7B10012153F /* VoodooI2CControllerDriver.hpp */; };
@@ -26,20 +17,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F12D20F91FCE12C300D8CFD4 /* CSMagicMultitouchDevice.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSMagicMultitouchDevice.cpp; sourceTree = "<group>"; };
+		F12D20FA1FCE12C300D8CFD4 /* CSMagicMultitouchDevice.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CSMagicMultitouchDevice.hpp; sourceTree = "<group>"; };
 		F1314C721F4EB6190012153F /* VoodooI2CPrecisionTouchpad.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoodooI2CPrecisionTouchpad.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1314C751F4EB6190012153F /* VoodooI2CPrecisionTouchpad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VoodooI2CPrecisionTouchpad.hpp; sourceTree = "<group>"; };
 		F1314C771F4EB6190012153F /* VoodooI2CPrecisionTouchpad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VoodooI2CPrecisionTouchpad.cpp; sourceTree = "<group>"; };
 		F1314C791F4EB6190012153F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F1314C7F1F4EB6610012153F /* csgesturescroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csgesturescroll.h; sourceTree = "<group>"; };
-		F1314C801F4EB6610012153F /* csgesture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csgesture.cpp; sourceTree = "<group>"; };
-		F1314C811F4EB6610012153F /* AverageClasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AverageClasses.h; sourceTree = "<group>"; };
-		F1314C821F4EB6610012153F /* csgesture-softc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "csgesture-softc.h"; sourceTree = "<group>"; };
-		F1314C831F4EB6610012153F /* csgesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = csgesture.h; sourceTree = "<group>"; };
-		F1314C841F4EB6610012153F /* csgesturescroll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csgesturescroll.cpp; sourceTree = "<group>"; };
-		F1314C851F4EB6610012153F /* VoodooCSGestureHIDWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoodooCSGestureHIDWrapper.cpp; sourceTree = "<group>"; };
-		F1314C861F4EB6610012153F /* VoodooCSGestureHIDWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoodooCSGestureHIDWrapper.h; sourceTree = "<group>"; };
-		F1314C871F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VoodooCSGestureHIPointingWrapper.cpp; sourceTree = "<group>"; };
-		F1314C881F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoodooCSGestureHIPointingWrapper.h; sourceTree = "<group>"; };
 		F1314C941F4EB7B10012153F /* helpers.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = helpers.hpp; sourceTree = "<group>"; };
 		F1314C951F4EB7B10012153F /* VoodooI2CControllerConstants.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VoodooI2CControllerConstants.hpp; sourceTree = "<group>"; };
 		F1314C961F4EB7B10012153F /* VoodooI2CControllerDriver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VoodooI2CControllerDriver.hpp; sourceTree = "<group>"; };
@@ -76,30 +59,14 @@
 		F1314C741F4EB6190012153F /* VoodooI2CPrecisionTouchpad */ = {
 			isa = PBXGroup;
 			children = (
+				F12D20F91FCE12C300D8CFD4 /* CSMagicMultitouchDevice.cpp */,
+				F12D20FA1FCE12C300D8CFD4 /* CSMagicMultitouchDevice.hpp */,
 				F1314C9C1F4EB7B60012153F /* VoodooI2C */,
-				F1314C931F4EB7080012153F /* Multitouch Library */,
 				F1314C751F4EB6190012153F /* VoodooI2CPrecisionTouchpad.hpp */,
 				F1314C771F4EB6190012153F /* VoodooI2CPrecisionTouchpad.cpp */,
 				F1314C791F4EB6190012153F /* Info.plist */,
 			);
 			path = VoodooI2CPrecisionTouchpad;
-			sourceTree = "<group>";
-		};
-		F1314C931F4EB7080012153F /* Multitouch Library */ = {
-			isa = PBXGroup;
-			children = (
-				F1314C7F1F4EB6610012153F /* csgesturescroll.h */,
-				F1314C801F4EB6610012153F /* csgesture.cpp */,
-				F1314C811F4EB6610012153F /* AverageClasses.h */,
-				F1314C821F4EB6610012153F /* csgesture-softc.h */,
-				F1314C831F4EB6610012153F /* csgesture.h */,
-				F1314C841F4EB6610012153F /* csgesturescroll.cpp */,
-				F1314C851F4EB6610012153F /* VoodooCSGestureHIDWrapper.cpp */,
-				F1314C861F4EB6610012153F /* VoodooCSGestureHIDWrapper.h */,
-				F1314C871F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.cpp */,
-				F1314C881F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.h */,
-			);
-			name = "Multitouch Library";
 			sourceTree = "<group>";
 		};
 		F1314C9C1F4EB7B60012153F /* VoodooI2C */ = {
@@ -121,15 +88,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1314C991F4EB7B10012153F /* VoodooI2CControllerConstants.hpp in Headers */,
-				F1314C901F4EB6610012153F /* VoodooCSGestureHIDWrapper.h in Headers */,
-				F1314C8C1F4EB6610012153F /* csgesture-softc.h in Headers */,
-				F1314C8D1F4EB6610012153F /* csgesture.h in Headers */,
-				F1314C8B1F4EB6610012153F /* AverageClasses.h in Headers */,
 				F1314C981F4EB7B10012153F /* helpers.hpp in Headers */,
 				F1314C761F4EB6190012153F /* VoodooI2CPrecisionTouchpad.hpp in Headers */,
-				F1314C891F4EB6610012153F /* csgesturescroll.h in Headers */,
 				F1314C9B1F4EB7B10012153F /* VoodooI2CControllerNub.hpp in Headers */,
-				F1314C921F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.h in Headers */,
 				F1314C9A1F4EB7B10012153F /* VoodooI2CControllerDriver.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,10 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1314C781F4EB6190012153F /* VoodooI2CPrecisionTouchpad.cpp in Sources */,
-				F1314C8E1F4EB6610012153F /* csgesturescroll.cpp in Sources */,
-				F1314C8A1F4EB6610012153F /* csgesture.cpp in Sources */,
-				F1314C911F4EB6610012153F /* VoodooCSGestureHIPointingWrapper.cpp in Sources */,
-				F1314C8F1F4EB6610012153F /* VoodooCSGestureHIDWrapper.cpp in Sources */,
+				F12D20FB1FCE12C300D8CFD4 /* CSMagicMultitouchDevice.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +307,7 @@
 				F1314C7E1F4EB6190012153F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

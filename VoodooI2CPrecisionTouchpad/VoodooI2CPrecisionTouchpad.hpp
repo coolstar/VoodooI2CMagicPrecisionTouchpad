@@ -13,7 +13,7 @@
 #include <IOKit/acpi/IOACPIPlatformDevice.h>
 #include <IOKit/IOTimerEventSource.h>
 #include "VoodooI2CControllerDriver.hpp"
-#include "csgesture.h"
+#include "CSMagicMultitouchDevice.hpp"
 
 struct __attribute__((__packed__)) i2c_hid_descr {
     UInt16 wHIDDescLength;
@@ -40,13 +40,12 @@ private:
     VoodooI2CControllerDriver *i2cController;
     IOService *provider;
     IOInterruptEventSource *interruptSource;
-    IOTimerEventSource *timerSource;
-    
-    CSGesture* wrapper;
     
     uint32_t hw_res_x, hw_res_y;
     
-    struct csgesture_softc softc;
+    magic_softc sc;
+    
+    CSMagicMultitouchDevice *magicMultitouchDevice;
     
     IOWorkLoop *workLoop;
     
@@ -79,7 +78,6 @@ public:
     virtual void stop(IOService *provider) override;
     virtual IOReturn setPowerState(unsigned long powerState, IOService *whatDevice) override;
     
-    void get_input(OSObject *owner, IOTimerEventSource* sender);
     void read_input();
     
     void InterruptOccured(OSObject* owner, IOInterruptEventSource* src, int intCount);
